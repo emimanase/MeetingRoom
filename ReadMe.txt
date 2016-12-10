@@ -7,4 +7,6 @@
 2. Update MeetingRoom\MeetingRoomUI\App.config  to point to the installed instance of SQL (database should not be changed)
 3. Update MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.exe.config  to point to the installed instance of SQL (database should not be changed)
 
-4. Run it MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.exe
+4. Notice the MeetingRoom\MeetingRoomUI\bin\Debug\Log.txt   is the file where logger writes errors and warnings and infos.
+
+5. Run it MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.exe
