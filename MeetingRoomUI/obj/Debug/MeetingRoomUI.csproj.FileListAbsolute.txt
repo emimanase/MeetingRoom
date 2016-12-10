@@ -1,0 +1,12 @@
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.exe.config
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.exe
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\MeetingRoomUI.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\Employee.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\DAL.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\Logger.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\Employee.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\DAL.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\bin\Debug\Logger.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\obj\Debug\MeetingRoomUI.csprojResolveAssemblyReference.cache
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\obj\Debug\MeetingRoomUI.exe
+D:\Personal\C# Projects\MeetingRoom\MeetingRoomUI\obj\Debug\MeetingRoomUI.pdb

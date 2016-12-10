@@ -1,0 +1,8 @@
+D:\Personal\C# Projects\MeetingRoom\DAL\bin\Debug\DAL.dll
+D:\Personal\C# Projects\MeetingRoom\DAL\bin\Debug\DAL.pdb
+D:\Personal\C# Projects\MeetingRoom\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Personal\C# Projects\MeetingRoom\DAL\obj\Debug\DAL.dll
+D:\Personal\C# Projects\MeetingRoom\DAL\obj\Debug\DAL.pdb
+D:\Personal\C# Projects\MeetingRoom\DAL\bin\Debug\DAL.dll.config
+D:\Personal\C# Projects\MeetingRoom\DAL\bin\Debug\Logger.dll
+D:\Personal\C# Projects\MeetingRoom\DAL\bin\Debug\Logger.pdb

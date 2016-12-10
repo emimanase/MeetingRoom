@@ -1,0 +1,5 @@
+D:\Personal\C# Projects\MeetingRoom\Logger\bin\Debug\Logger.dll
+D:\Personal\C# Projects\MeetingRoom\Logger\bin\Debug\Logger.pdb
+D:\Personal\C# Projects\MeetingRoom\Logger\obj\Debug\Logger.dll
+D:\Personal\C# Projects\MeetingRoom\Logger\obj\Debug\Logger.pdb
+D:\Personal\C# Projects\MeetingRoom\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache

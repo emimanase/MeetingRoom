@@ -1,0 +1,9 @@
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\DAL.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\DAL.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\Employee.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\Employee.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\obj\Debug\Employee.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\obj\Debug\Employee.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\Logger.dll
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\bin\Debug\Logger.pdb
+D:\Personal\C# Projects\MeetingRoom\MeetingRoom\obj\Debug\EmployeeContext.csprojResolveAssemblyReference.cache
