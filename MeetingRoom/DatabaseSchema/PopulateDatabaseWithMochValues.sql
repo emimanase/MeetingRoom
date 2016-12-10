@@ -62,6 +62,5 @@ Begin
 	insert into dbo.Timetable (RoomId, EmployeeCNP, [From], [To]) values (1, '1930704350001', '8/12/2016 16:00:000', '8/12/2016 18:00:000')
 	insert into dbo.Timetable (RoomId, EmployeeCNP, [From], [To]) values (1, '1930704350002', '7/12/2016 9:00:000', '7/12/2016 11:00:000')
 	insert into dbo.Timetable (RoomId, EmployeeCNP, [From], [To]) values (4, '1930704350003', '7/12/2016 9:00:000', '7/12/2016 11:00:000')
-	insert into dbo.Timetable (RoomId, EmployeeCNP, [From], [To]) values (6, '1930704350005', '10/12/2016 9:00:000', '10/12/2016 11:00:000')
 End
 Go

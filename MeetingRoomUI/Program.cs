@@ -80,7 +80,7 @@ namespace MeetingRoomUI
         {
             var employees = _employeeRepo.GetAllEmployees();
             DisplayEmployees(employees);
-            Console.WriteLine("Pick an employee");
+            Console.WriteLine("Pick an employee (index)");
             
             return employees.ToArray()[Int32.Parse(Console.ReadLine())];
         }
@@ -149,7 +149,7 @@ namespace MeetingRoomUI
 
         private static void CheckBookingHistory(EmployeeAggregate employee)
         {
-            var lowerRoleEmployees = _employeeRepo.GetAllEmployees().Where(e => e.Role < employee.Role);
+            var lowerRoleEmployees = _employeeRepo.GetAllEmployees().Where(e => e.Role <= employee.Role);
             var rooms = new List<MeetingRoom>();
             foreach (var emp in lowerRoleEmployees)
             {
@@ -161,7 +161,7 @@ namespace MeetingRoomUI
             }
 
             DisplayRooms(rooms);
-            Console.WriteLine("These are rooms you can view. Pick a room to see its history!");
+            Console.WriteLine("These are rooms you can view. Pick a room (index) to see its history!");
             var pickedRoom = rooms[Int32.Parse(Console.ReadLine())];
             var history = pickedRoom.CheckHistory();
             DisplayHistory(history);
@@ -174,6 +174,9 @@ namespace MeetingRoomUI
 
         private static void DisplayHistory(IEnumerable<TimetableHistory> historyEntries)
         {
+            var header = string.Format("|{0,8}|{1,8}|{2,8}|{3,8}|{4,8}|{5,8}|{6,8}|{7,8}|", "Index", "Room Id", "Type", "Field Name",
+                "Old Value", "New Value", "Updated Date", "Employee CNP");
+            Console.WriteLine(header);
             foreach (var entry in historyEntries)
             {
                 var displayedEntry = string.Format("|{0,8}|{1,8}|{2,8}|{3,8}|{4,8}|{5,8}|{6,8}|{7,8}|", 
@@ -201,7 +204,7 @@ namespace MeetingRoomUI
         private static void DeleteAvailableRoom(EmployeeAggregate employee)
         {
             DisplayRooms(employee.AvailableRooms);
-            Console.WriteLine("Pick a room to delete it!");
+            Console.WriteLine("Pick a room (index) to delete it!");
 
             var room = employee.AvailableRooms[Int32.Parse(Console.ReadLine())];
             employee.DeleteRoom(room);
@@ -229,6 +232,8 @@ namespace MeetingRoomUI
 
         private static void DisplayEmployee(EmployeeAggregate employee)
         {
+            var header = string.Format("|{0,5}|{1,5}|{2,5}|{3,5}|{4,5}|", "Employee CNP", "First Name", "Last Name", "Role", "Available Rooms Id" );
+            Console.WriteLine(header);
             var rooms = employee.AvailableRooms.Aggregate("", (a, x) => a + x.Id + ",");
             var displayedEmployee = string.Format("|{0,5}|{1,5}|{2,5}|{3,5}|{4,5}|", employee.Cnp,
                                                                                       employee.FirstName,
@@ -241,6 +246,8 @@ namespace MeetingRoomUI
 
         private static void DisplayEmployees(IEnumerable<EmployeeAggregate> employees)
         {
+            var header = string.Format("|{0,5}|{1,5}|{2,5}|{3,5}|{4,5}|{5,5}|", "Index", "CNP", "First Name", "Last Name", "Role","Available Rooms Id");
+            Console.WriteLine(header);
             foreach (var employee in employees)
             {
                 var rooms = employee.AvailableRooms.Aggregate("", (current, room) => current + room.Id.ToString() + ',');
@@ -263,7 +270,7 @@ namespace MeetingRoomUI
                 Console.WriteLine("{0}. {1}",i,value);
                 i++;
             }
-            Console.WriteLine("Pick a role!");
+            Console.WriteLine("Pick a role (number)!");
             return Int32.Parse(Console.ReadLine());
         }
         #endregion Employees
@@ -273,7 +280,7 @@ namespace MeetingRoomUI
         {
             var rooms = _roomRepo.GetAllMeetingRooms();
             DisplayRooms(rooms);
-            Console.WriteLine("Pick a room!");
+            Console.WriteLine("Pick a room (index)!");
 
             return rooms.ToArray()[Int32.Parse(Console.ReadLine())];
         }
@@ -333,14 +340,14 @@ namespace MeetingRoomUI
                 Console.WriteLine("{0}. {1}",i, asset);
                 i++;
             }
-            Console.WriteLine("Pick an asset!");
+            Console.WriteLine("Pick an asset (number)!");
             return Int32.Parse(Console.ReadLine());
         }
 
         private static void DisplayRooms(IEnumerable<MeetingRoom> rooms)
         {
             var header = string.Format("|{0,6}|{1,6}|{2,6}|{3,6}|{4,6}|", "Index", "Room Id", "Capacity", "Floor",
-                "Assets");
+                "Assets Id");
             Console.WriteLine(header);                          
             foreach (var room in rooms)
             {
@@ -358,7 +365,7 @@ namespace MeetingRoomUI
         private static void BookRoom(EmployeeAggregate employee)
         {
             DisplayRooms(employee.AvailableRooms);
-            Console.WriteLine("Pick a room to book!");
+            Console.WriteLine("Pick a room (index) to book!");
             var room = employee.AvailableRooms[Int32.Parse(Console.ReadLine())];
             Console.WriteLine("Please provide date and time in this supported format: dd/mm/yyyy hh:mm");
             Console.WriteLine("From date and time:");
@@ -392,10 +399,10 @@ namespace MeetingRoomUI
             }
 
             DisplayRooms(rooms);
-            Console.WriteLine("These are rooms you can update. Pick a room to update timetable!");
+            Console.WriteLine("These are rooms you can update. Pick a room (index) to update timetable!");
             var pickedRoom = rooms[Int32.Parse(Console.ReadLine())];
             DisplayTimetable(pickedRoom.Timetable);
-            Console.WriteLine("Pick an entry to update it!");
+            Console.WriteLine("Pick an entry (index) to update it!");
             var pickedEntry = pickedRoom.Timetable[Int32.Parse(Console.ReadLine())];
             Console.WriteLine("Please provide date and time in this supported format: dd/mm/yyyy hh:mm");
             Console.WriteLine("From date and time:");
@@ -430,10 +437,10 @@ namespace MeetingRoomUI
             }
 
             DisplayRooms(rooms);
-            Console.WriteLine("These are rooms you can update. Pick a room to update timetable!");
+            Console.WriteLine("These are rooms you can update. Pick a room (index) to update timetable!");
             var pickedRoom = rooms[Int32.Parse(Console.ReadLine())];
             DisplayTimetable(pickedRoom.Timetable);
-            Console.WriteLine("Pick an entry to delete it!");
+            Console.WriteLine("Pick an entry (index) to delete it!");
             var pickedEntry = pickedRoom.Timetable[Int32.Parse(Console.ReadLine())];
             var deleted = employee.RemoveBookingOnRoom(pickedRoom, pickedEntry.From, pickedEntry.To);
             if (deleted)
@@ -454,6 +461,8 @@ namespace MeetingRoomUI
 
         private static void DisplayTimetable(IEnumerable<TimetableEntry> timetable)
         {
+            var header = string.Format("|{0,5}|{1,5}|{2,5}|{3,5}|{4,5}|","Index", "Id","From Date", "To Date", "Owner CNP" );
+            Console.WriteLine(header);
             foreach (var entry in timetable)
             {
                 var displayedEntry = string.Format("|{0,5}|{1,5}|{2,5}|{3,5}|{4,5}|", timetable.ToList().IndexOf(entry),

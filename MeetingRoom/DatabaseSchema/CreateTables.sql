@@ -50,15 +50,14 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Timet
 	)
 GO
 
-
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME= 'TimetableHistory')
 	create table TimetableHistory(
 		AuditId [int] IDENTITY(1,1) NOT NULL,
 		RoomId int Foreign key references Room(Id) ON DELETE CASCADE,
 		[Type] char(1), 
 		FieldName varchar(128), 
-		OldValue varchar(1000), 
-		NewValue varchar(1000), 
+		OldValue sql_variant, 
+		NewValue sql_variant, 
 		UpdateDate datetime DEFAULT (GetDate()), 
 		Employee varchar(128)
 	)
@@ -87,8 +86,8 @@ declare @bit int,
 @ParamDefinition varchar(1000),
 @deletedColumnName varchar(100),
 @insertedColumnName varchar(100),
-@deletedValue varchar(100),
-@insertedValue varchar(100)
+@deletedValue sql_variant,
+@insertedValue sql_variant
 
 	-- date
 	set @UpdateDate = GETDATE()
@@ -109,32 +108,42 @@ declare @bit int,
 		set @RoomId = (select RoomId from deleted)
 		set @Employee = (select EmployeeCNP from deleted)
 	End
-	-- get list of columns
-	select * into #ins from inserted
-	select * into #del from deleted
 
-	select @field = 0, @maxfield = max(ORDINAL_POSITION) from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'Timetable'
-	while @field < @maxfield
-	begin
-		select @field = min(ORDINAL_POSITION) from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'Timetable' and ORDINAL_POSITION > @field
-		select @bit = (@field - 1 )% 8 + 1
-		select @bit = power(2,@bit - 1)
-		select @char = ((@field - 1) / 8) + 1
-		
-		if substring(COLUMNS_UPDATED(),@char, 1) & @bit > 0 or @Type in ('I','D')
-		begin
-			set @deletedColumnName = 'd.'+@fieldName
-			set @insertedColumnName = 'i.'+@fieldName
-
-			select @fieldname = COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'Timetable' and ORDINAL_POSITION = @field
-			set @deletedValue = (select @deletedColumnName from deleted d)
-			set @insertedValue = (select @insertedColumnName from inserted i)
+		set @deletedValue = (select RoomId from deleted)
+		set @insertedValue = (select RoomId from inserted)
+	
+		if(@deletedValue <> @insertedValue or @deletedValue is null or @insertedValue is null)
+		Begin
+			set @Employee = (select EmployeeCNP from inserted)
 			insert TimetableHistory ([Type], FieldName, OldValue, NewValue, UpdateDate, Employee, RoomId)
-						select  @Type, @fieldName, @deletedValue, @insertedValue, @UpdateDate, @Employee,@RoomId
-						from inserted i 
-						full outer join deleted d on d.Id = i.Id
-						where @insertedValue <> @deletedValue
-							or (@insertedValue is null and  @deletedValue is not null)
-							or (@insertedValue is not null and  @deletedValue is null)
-		end
-	end
+						values(@Type, 'RoomId', @deletedValue, @insertedValue, @UpdateDate, @Employee,@RoomId)
+		End
+		
+		set @deletedValue = (select [From] from deleted)
+		set @insertedValue = (select [From] from inserted)
+		if(@deletedValue <> @insertedValue or @deletedValue is null or @insertedValue is null)
+		Begin
+			
+			set @Employee = (select EmployeeCNP from inserted)
+			insert TimetableHistory ([Type], FieldName, OldValue, NewValue, UpdateDate, Employee, RoomId)
+						values(@Type, 'From', @deletedValue, @insertedValue, @UpdateDate, @Employee,@RoomId)
+		End
+		
+		set @deletedValue = (select [To] from deleted)
+		set @insertedValue = (select [To] from inserted)
+		if(@deletedValue <> @insertedValue or @deletedValue is null or @insertedValue is null)
+		Begin
+			set @Employee = (select EmployeeCNP from inserted)
+			insert TimetableHistory ([Type], FieldName, OldValue, NewValue, UpdateDate, Employee, RoomId)
+						values(@Type, 'To', @deletedValue, @insertedValue, @UpdateDate, @Employee,@RoomId)
+		End
+
+		set @deletedValue = (select [EmployeeCNP] from deleted)
+		set @insertedValue = (select [EmployeeCNP] from inserted)
+		if(@deletedValue <> @insertedValue or @deletedValue is null or @insertedValue is null)
+		Begin
+			set @Employee = (select EmployeeCNP from inserted)
+			insert TimetableHistory ([Type], FieldName, OldValue, NewValue, UpdateDate, Employee, RoomId)
+						values(@Type, 'EmployeeCNP', @deletedValue, @insertedValue, @UpdateDate, @Employee,@RoomId)
+		End
+	

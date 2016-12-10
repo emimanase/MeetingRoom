@@ -54,7 +54,7 @@ namespace EmployeeContext.Repositories
                 var fieldName = row["FieldName"].ToString();
                 var oldValue = row["OldValue"].ToString();
                 var newValue = row["NewValue"].ToString();
-                var updatedDate = Convert.ToDateTime(row["UpdatedDate"].ToString());
+                var updatedDate = Convert.ToDateTime(row["UpdateDate"].ToString());
                 var employeeCnp = new CNP(row["Employee"].ToString());
 
                 var historyEntry = new TimetableHistory(room, type, fieldName, oldValue, newValue, updatedDate, employeeCnp);
