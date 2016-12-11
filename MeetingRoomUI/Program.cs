@@ -347,11 +347,11 @@ namespace MeetingRoomUI
         private static void DisplayRooms(IEnumerable<MeetingRoom> rooms)
         {
             var header = string.Format("|{0,6}|{1,6}|{2,6}|{3,6}|{4,6}|", "Index", "Room Id", "Capacity", "Floor",
-                "Assets Id");
+                "Assets");
             Console.WriteLine(header);                          
             foreach (var room in rooms)
             {
-                var assets = room.Assets.Aggregate("", (current, asset) => current + (int)asset + ',');
+                var assets = room.Assets.Aggregate("", (current, asset) => current + asset.ToString() + ',');
                 var displayedRoom = string.Format("|{0,6}|{1,6}|{2,6}|{3,6}|{4,6}|", rooms.ToList().IndexOf(room),
                                                                                       room.Id,
                                                                                       room.Capacity,
